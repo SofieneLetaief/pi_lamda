@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.lamda.gui.AjouterReservationController">
+   <children>
+      <AnchorPane fx:id="selectPane" layoutX="24.0" layoutY="77.0" prefHeight="580.0" prefWidth="550.0" style="-fx-background-color: #F5F5F5;" styleClass="tiles">
+         <children>
+            <Label alignment="CENTER" layoutX="241.0" layoutY="76.0" prefHeight="40.0" prefWidth="117.0" text="here we go" textFill="#020438">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label layoutX="61.0" layoutY="325.0" prefHeight="40.0" prefWidth="117.0" text="story" textFill="#020438">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label layoutX="61.0" layoutY="148.0" prefHeight="40.0" prefWidth="117.0" text="Title" textFill="#020438">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="cancelbtn" buttonType="RAISED" layoutX="290.0" layoutY="490.0" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #73A800; -fx-background-radius: 20;" text="Cancel" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <Label fx:id="ticketPriceLabel" layoutX="165.0" layoutY="340.0" prefHeight="47.0" prefWidth="250.0" textFill="#020438">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="errorlabel" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="397.0" prefHeight="89.0" prefWidth="520.0" textAlignment="CENTER" textFill="#d21a1a" wrapText="true">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="40.0" layoutY="30.0" text="Share your story with us" textFill="#020438" underline="true">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="27.0" />
+               </font>
+            </Label>
+            <JFXCheckBox fx:id="checkbox" checkedColor="#73a800" disable="true" layoutX="367.0" layoutY="364.0" style="-fx-opacity: 1;" text="Selected Seats" textFill="#0d2c54" unCheckedColor="#ac005d" visible="false" />
+            <JFXButton fx:id="sharebtn" buttonType="RAISED" layoutX="100.0" layoutY="490.0" onAction="#AjouterPoste" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #AC005D; -fx-background-radius: 20;" text="Share" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXTextField fx:id="titlefield" layoutX="140.0" layoutY="156.0" />
+            <JFXTextArea fx:id="subjectfield" layoutX="145.0" layoutY="222.0" prefHeight="177.0" prefWidth="374.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="570.0" layoutY="77.0" prefHeight="580.0" prefWidth="356.0" style="-fx-background-color: #e7e6e1;" styleClass="tiles">
+         <children>
+            <Label layoutX="40.0" layoutY="251.0" prefHeight="40.0" prefWidth="195.0" text="Select Groupe" textFill="#020438">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="datelabel" layoutX="40.0" layoutY="339.0" prefHeight="27.0" prefWidth="273.0" text="User name:" textFill="#020438">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="timelabel" layoutX="40.0" layoutY="379.0" prefHeight="27.0" prefWidth="273.0" text="Programme:" textFill="#020438">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <JFXComboBox fx:id="groupeCombo" focusColor="#ac005d" layoutX="40.0" layoutY="290.0" onAction="#selectGroupe" prefHeight="26.0" prefWidth="273.0" style="-fx-background-color: #E7E6E1;" unFocusColor="#3a0088" value="0">
+               <items>
+                  <FXCollections fx:factory="observableArrayList" />
+               </items>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXComboBox>
+            <JFXButton fx:id="loeadbtn" buttonType="RAISED" layoutX="105.0" layoutY="490.0" onAction="#handleButtons" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #00A6ED; -fx-background-radius: 20;" text="UPLOAD" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <Line endX="170.0" layoutX="140.0" layoutY="373.0" startX="-100.0" stroke="#ac005d" strokeWidth="1.5" />
+            <Line endX="170.0" layoutX="140.0" layoutY="414.0" startX="-100.0" stroke="#ac005d" strokeWidth="1.5" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e7e6e1" height="222.0" layoutX="39.0" layoutY="17.0" stroke="#00043c" strokeType="INSIDE" styleClass="tiles" width="161.0" />
+            <JFXTextField fx:id="imagefield" focusColor="#3a0088" labelFloat="true" layoutX="48.0" layoutY="434.0" prefHeight="26.0" prefWidth="240.0" promptText="Image" style="-fx-text-fill: #00043C; -fx-prompt-text-fill: #00043C;" unFocusColor="#111f4d">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </JFXTextField>
+            <Line endX="170.0" layoutX="140.0" layoutY="474.0" startX="-100.0" stroke="#ac005d" strokeWidth="1.5" />
+            <ImageView fx:id="selectedimage" fitHeight="150.0" fitWidth="135.0" layoutX="48.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="toppane" prefHeight="35.0" prefWidth="950.0" style="-fx-background-color: #AC005D;">
+         <children>
+            <Label layoutX="411.0" layoutY="7.0" text="Add your poste" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+                  <MaterialDesignIconView fill="WHITE" glyphName="TICKET" size="20" />
+               </graphic>
+            </Label>
+            <HBox layoutX="880.0" prefHeight="35.0">
+               <children>
+                  <JFXButton fx:id="minimisebtn" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#minimiseWindow" prefHeight="35.0" prefWidth="35.0" ripplerFill="WHITE" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="MINUS" size="20" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="closebtn" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleClose" prefHeight="35.0" prefWidth="35.0" ripplerFill="WHITE">
+                     <graphic>
+                        <MaterialDesignIconView fill="WHITE" glyphName="CLOSE" size="24" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
