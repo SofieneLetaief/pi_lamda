@@ -15,6 +15,7 @@ import edu.lamda.services.ServiceReservation;
 import edu.lamda.tools.CurrentSession;
 import java.net.URL;
 import java.sql.Date;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
@@ -31,6 +32,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  * FXML Controller class
@@ -146,6 +152,47 @@ public class GestionReservationController implements Initializable {
         
          nombreTf.setText(null);
          reserveBtn.setDisable(true);
+         
+          try {
+                    String host = "smtp.gmail.com";
+                    String user = "lamdaappdev@gmail.com";
+                    String pass = "lamda123";
+                    
+                    String to = CurrentSession.client.getMail();
+                    String from = "lamdaappdev@gmail.com";
+                    String subject = "Your Reservation  Was Successfully Created";
+                    String messageText = "Welcome " + "Mr." +  CurrentSession.client.getNom()+" " +CurrentSession.client.getPrenom();;
+
+                    boolean sessionDebug = false;
+
+                    Properties props = System.getProperties();
+
+                    props.put("mail.smtp.starttls.enable", "true");
+                    props.put("mail.smtp.host", host);
+                    props.put("mail.smtp.port", "587");
+                    props.put("mail.smtp.auth", "true");
+                    props.put("mail.smtp.starttls.required", "true");
+
+                    java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+                    Session mailSession = Session.getDefaultInstance(props, null);
+                    mailSession.setDebug(sessionDebug);
+                    Message msg = new MimeMessage(mailSession);
+                    msg.setFrom(new InternetAddress(from));
+                    InternetAddress[] address = {new InternetAddress(to)};
+                    msg.setRecipients(Message.RecipientType.TO, address);
+                    msg.setSubject(subject);
+                    msg.setSentDate(new java.util.Date());
+                    msg.setText(messageText);
+
+                    Transport transport = mailSession.getTransport("smtp");
+                    transport.connect(host, user, pass);
+                    transport.sendMessage(msg, msg.getAllRecipients());
+                    transport.close();
+                    System.out.println("message send successfully");
+                } catch (Exception ex) {
+                    System.out.println(ex);
+
+                }
          
          
         

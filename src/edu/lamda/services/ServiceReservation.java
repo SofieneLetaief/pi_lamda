@@ -8,6 +8,7 @@ package edu.lamda.services;
 import edu.lamda.entities.Evenement;
 import edu.lamda.entities.Reservation;
 import edu.lamda.interfaces.Ireservation;
+import edu.lamda.tools.CurrentSession;
 import edu.lamda.tools.Myconnexion;
 import edu.lamda.tools.Notification;
 import java.sql.PreparedStatement;
@@ -15,7 +16,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  *
@@ -33,6 +41,9 @@ public class ServiceReservation implements Ireservation<Reservation> {
             pst.setInt(2, idCl);
             pst.executeUpdate();
             Notification.notificationPopUp("reservation Ajouté", "" , "SUCCESS");
+            
+            
+             
         } catch (SQLException ex) {
          Notification.notificationPopUp("Problème reservation  ", "", "FAIL");
         }
