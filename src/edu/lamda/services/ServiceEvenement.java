@@ -333,4 +333,44 @@ public class ServiceEvenement implements Ievenement<Evenement> {
         return listEvenement;
     }
 
+    @Override
+    public int nombrePlaceDispo(int idEvent) {
+    int nbReservation =-1;
+    int nbPlace=-1;
+        try {
+            System.out.println("idEvent +"+idEvent);
+            //supprimerEvenementTerminer();
+            String requete = "SELECT count(*) as nb FROM reservation where event_id="+idEvent;
+            PreparedStatement pst = Myconnexion.getInstance().getCnx()
+                    .prepareStatement(requete);
+            
+    
+            
+            ResultSet rs = pst.executeQuery(requete);
+         while (rs.next()) {
+             nbReservation=rs.getInt("nb");
+             
+              
+         }
+
+         
+        requete = "SELECT nbpart FROM evenement where id="+idEvent;
+          pst = Myconnexion.getInstance().getCnx()
+                    .prepareStatement(requete);
+            
+     //     pst.setInt(1, idEvent);
+            
+           rs = pst.executeQuery(requete);
+         while (rs.next()) {
+             nbPlace=rs.getInt("nbpart");
+             
+              
+         }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+         return nbPlace-nbReservation; 
+    }
+
 }

@@ -73,10 +73,11 @@ public class GestionReservationController implements Initializable {
      */
     
          int idCurrentUpdatedEvent;
+         int placeDispo=0;
      ServiceEvenement se = new ServiceEvenement();
      ObservableList list = FXCollections.observableArrayList();
     @FXML
-    private JFXTextField nombreTf1;
+    private JFXTextField nombreResTf;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         loadDataEvent();
@@ -88,9 +89,10 @@ public class GestionReservationController implements Initializable {
                           System.out.println(newValue);
                           
                           idCurrentUpdatedEvent=((Evenement) newValue).getId();
+                    placeDispo=se.nombrePlaceDispo(((Evenement) newValue).getId());
+                        System.out.println(placeDispo);
                           
-                          
-                    // nombreTf1.setText(((Evenement) newValue).get());
+           nombreTf.setText(String.valueOf(placeDispo));
                }
 
         });

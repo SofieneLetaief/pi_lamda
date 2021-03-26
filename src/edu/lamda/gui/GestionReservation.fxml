@@ -55,13 +55,13 @@
                   <Font name="System Bold" size="17.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="nombreTf" editable="false" focusColor="#3a0088" labelFloat="true" layoutX="14.0" layoutY="118.0" prefHeight="26.0" prefWidth="240.0" promptText=" Nombre de place Disponible" style="-fx-text-fill: #00043C; -fx-prompt-text-fill: #00043C;" unFocusColor="#111f4d">
+            <JFXTextField fx:id="nombreTf" disable="true" editable="false" focusColor="#3a0088" labelFloat="true" layoutX="14.0" layoutY="118.0" prefHeight="26.0" prefWidth="240.0" promptText=" Nombre de place Disponible" style="-fx-text-fill: #00043C; -fx-prompt-text-fill: #00043C;" unFocusColor="#111f4d">
                <font>
                   <Font size="17.0" />
                </font>
             </JFXTextField>
             <Line endX="170.0" layoutX="115.0" layoutY="158.0" startX="-100.0" stroke="#ac005d" strokeWidth="1.5" />
-            <JFXTextField fx:id="nombreTf1" focusColor="#3a0088" labelFloat="true" layoutX="14.0" layoutY="217.0" prefHeight="26.0" prefWidth="240.0" promptText="Nombre a reservé" style="-fx-text-fill: #00043C; -fx-prompt-text-fill: #00043C;" unFocusColor="#111f4d">
+            <JFXTextField fx:id="nombreResTf" focusColor="#3a0088" labelFloat="true" layoutX="14.0" layoutY="217.0" prefHeight="26.0" prefWidth="240.0" promptText="Nombre a reservé" style="-fx-text-fill: #00043C; -fx-prompt-text-fill: #00043C;" unFocusColor="#111f4d">
                <font>
                   <Font size="17.0" />
                </font>

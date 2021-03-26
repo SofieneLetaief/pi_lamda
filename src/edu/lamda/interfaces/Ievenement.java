@@ -40,4 +40,6 @@ public interface Ievenement <t>{
 
     public List<Evenement> triEvenementParDate();
     
+     public int nombrePlaceDispo(int idEvenet);
+    
 }
