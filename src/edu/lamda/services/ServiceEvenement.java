@@ -65,7 +65,7 @@ public class ServiceEvenement implements Ievenement<Evenement> {
                     .prepareStatement(requete);
             pst.setInt(1, ide);
             pst.executeUpdate();
-            System.out.println("Personne supprimée");
+            System.out.println("evenement supprimée");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -113,6 +113,8 @@ public class ServiceEvenement implements Ievenement<Evenement> {
             pst.setDate(5, ev.getDate());
             pst.setInt(6, ide);
             pst.executeUpdate();
+            System.out.println("from serice "  + ev);
+            System.out.println(ide);
             System.out.println("evenement modifiée");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

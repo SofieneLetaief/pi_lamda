@@ -34,6 +34,12 @@
                </columns>
             </TableView>
             <FontAwesomeIconView fx:id="bnRefresh" fill="#00e676" glyphName="REFRESH" layoutX="15.0" layoutY="63.0" onMouseClicked="#refreshTable" size="30" />
+            <JFXTextField fx:id="searchTf" focusColor="#3a0088" layoutX="367.0" layoutY="32.0" onKeyTyped="#filter" prefHeight="18.0" prefWidth="120.0" promptText="Search" style="-fx-text-fill: #00043C; -fx-prompt-text-fill: #00043C;" unFocusColor="#111f4d">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </JFXTextField>
+            <Line endX="21.0" layoutX="468.0" layoutY="71.0" startX="-100.0" stroke="#ac005d" strokeWidth="1.5" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="528.0" layoutY="77.0" prefHeight="580.0" prefWidth="356.0" style="-fx-background-color: #e7e6e1;" styleClass="tiles">

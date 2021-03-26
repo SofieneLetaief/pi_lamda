@@ -18,6 +18,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,6 +29,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -86,7 +88,7 @@ public class GestionEvenementController implements Initializable {
      * Initializes the controller class.
      */
     
-       ServiceEvenement se = new ServiceEvenement();
+   
     @FXML
     private JFXButton addBtn;
     @FXML
@@ -95,7 +97,11 @@ public class GestionEvenementController implements Initializable {
     private JFXButton deleteBtn;
        
        
-    int idCurrentUpdatedEvent;
+     int idCurrentUpdatedEvent;
+     ServiceEvenement se = new ServiceEvenement();
+     ObservableList list = FXCollections.observableArrayList();
+    @FXML
+    private JFXTextField searchTf;
        
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -106,8 +112,13 @@ public class GestionEvenementController implements Initializable {
        TableV.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue)
                 -> {
-                    System.out.println(newValue);
-                 populateInputs((Evenement) newValue);
+                  
+                    if(newValue!=null){
+                          System.out.println(newValue);
+                          
+                          idCurrentUpdatedEvent=((Evenement) newValue).getId();
+                      populateInputs((Evenement) newValue);
+               }
 
         });
     }    
@@ -171,7 +182,7 @@ public class GestionEvenementController implements Initializable {
  
      public void loadDataEvent(){
     //        ObservableList<Evenement> list=  loadEvenement();   
-           ObservableList list = FXCollections.observableArrayList();
+          list.clear();
           list.addAll(se.listEvenement());
   
          tvId.setCellValueFactory(new PropertyValueFactory<Evenement , Integer>("Id"));
@@ -191,7 +202,7 @@ public class GestionEvenementController implements Initializable {
     @FXML
     private void refreshTable(MouseEvent event) {
         
-           ObservableList list = FXCollections.observableArrayList();
+           list.clear();
            list.addAll(se.listEvenement());
         
           TableV.setItems(list);
@@ -252,7 +263,7 @@ public class GestionEvenementController implements Initializable {
     private void deleteEvent(ActionEvent event) {
         
         se.supprimerEvenementParId(idCurrentUpdatedEvent);
-        
+        refreshTable(null);
         
     }
     
@@ -273,4 +284,19 @@ public class GestionEvenementController implements Initializable {
         }
         tray.showAndDismiss(Duration.millis(3000));
     }
+          
+      @FXML
+    private void filter(KeyEvent event) {
+        list.clear();
+        // System.out.println("heyy yuuu");
+        list.addAll(se.listEvenement().stream().filter((evenement)
+                -> evenement.getNom().toLowerCase().contains(searchTf.getText().toLowerCase())
+                || evenement.getLieu().toLowerCase().contains(searchTf.getText().toLowerCase())
+                || String.valueOf(evenement.getNbpart()).toLowerCase().contains(searchTf.getText().toLowerCase())
+                || evenement.getHeure().toLowerCase().contains(searchTf.getText().toLowerCase())
+
+
+        ).collect(Collectors.toList()));
+    }      
+          
 }
