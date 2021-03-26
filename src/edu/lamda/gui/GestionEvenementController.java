@@ -12,6 +12,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.lamda.entities.Evenement;
 import edu.lamda.services.ServiceEvenement;
 import edu.lamda.tools.Myconnexion;
+import edu.lamda.tools.Notification;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
@@ -126,6 +127,8 @@ public class GestionEvenementController implements Initializable {
 
     @FXML
     private void ajouteEvent(ActionEvent event) {
+        
+       if(validator()){
           String nom = nomTf.getText();
         String lieu = lieuTf.getText();
         String heure = heureTf.getText();
@@ -144,12 +147,12 @@ public class GestionEvenementController implements Initializable {
         
          reset(null);
       
-        
+       }
     }
 
     @FXML
     private void updateEvent(ActionEvent event) {
-        
+             if(validator()){
          String nom = nomTf.getText();
         String lieu = lieuTf.getText();
         String heure = heureTf.getText();
@@ -165,7 +168,7 @@ public class GestionEvenementController implements Initializable {
          refreshTable(null);
          
          reset(null);
-      
+             }
         
     }
 
@@ -284,5 +287,51 @@ public class GestionEvenementController implements Initializable {
 
         ).collect(Collectors.toList()));
     }      
-          
+         
+    
+    public boolean validator(){
+        String msg="";
+       
+        if(nomTf.getText().length()==0){
+            msg+=" Champ Nom vide, ";
+           
+        }
+           if(lieuTf.getText().length()==0){
+            msg+=" Champ Lieu vide, ";
+           
+        }
+              if(heureTf.getText().length()==0){
+            msg+=" Champ Heure vide, \n";
+           
+        }
+                   if(datePicker.getValue()==null){
+            msg+=" Champ Date vide,  ";
+           
+        }
+                 if(!isNumeric(nombreTf.getText())){
+            msg+=" Champ Nombre must be numeric, ";
+           
+        }     
+           if(msg!="")  { 
+          Notification.notificationPopUp("Error Validator", msg, "FAIL");
+          return false;
+        }   
+           return true ;
+        
+    
+    }
+    
+    
+    public  boolean isNumeric(String strNum) {
+    if (strNum == null) {
+        return false;
+    }
+    try {
+        int d = Integer.parseInt(strNum);
+    } catch (NumberFormatException nfe) {
+        return false;
+    }
+    return true;
 }
+}
+
