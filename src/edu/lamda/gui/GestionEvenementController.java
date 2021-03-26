@@ -1,40 +1,35 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package edu.lamda.gui;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.lamda.entities.Evenement;
 import edu.lamda.tools.Myconnexion;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Collections;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.util.Callback;
 import javafx.util.Duration;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
@@ -43,12 +38,14 @@ import tray.notification.TrayNotification;
 /**
  * FXML Controller class
  *
- * @author arfaoui
+ * @author Letaief Sofiene
  */
 public class GestionEvenementController implements Initializable {
 
     @FXML
-    private TableView<Evenement> TableV;
+    private AnchorPane selectPane;
+    @FXML
+    private Label errorlabel;
     @FXML
     private TableColumn<Evenement , Integer> tvId;
     @FXML
@@ -62,51 +59,61 @@ public class GestionEvenementController implements Initializable {
     @FXML
     private TableColumn<Evenement , Date> tvDate;
     @FXML
-    private FontAwesomeIconView btnClose;
-    @FXML
-    private FontAwesomeIconView btnajouter;
-    
-    @FXML
-    private TableColumn<?, ?> tvDate1;
-    @FXML
     private FontAwesomeIconView bnRefresh;
-    
-   
+    @FXML
+    private JFXButton cancelbtn;
+    @FXML
+    private JFXButton AddEvent;
+    @FXML
+    private JFXButton updateEvent;
+    @FXML
+    private JFXTextField nomTf;
+    @FXML
+    private JFXTextField lieuTf;
+    @FXML
+    private JFXDatePicker datePicker;
+    @FXML
+    private JFXTextField heureTf;
+    @FXML
+    private JFXTextField nombreTf;
+    @FXML
+    private AnchorPane toppane;
+    @FXML
+    private JFXButton minimisebtn;
+    @FXML
+    private JFXButton closebtn;
+    @FXML
+    private TableView<Evenement> TableV;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        showreclamation();
-        
+     showreclamation();
     }    
 
+
     @FXML
-    private void close(MouseEvent event) {
-        
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+    private void ajouteEvent(ActionEvent event) {
     }
 
-//    @FXML
-//    private void getAddView(MouseEvent event) {
-//        try {
-//            Parent root = FXMLLoader.load(getClass().getResource("Ajouter.fxml"));
-//            Scene scene = new Scene(root);
-//            Stage stage = new Stage();
-//            stage.setScene(scene);
-//            stage.initStyle(StageStyle.UTILITY);
-//            stage.show();
-//            
-//        } catch (IOException ex) {
-//            System.out.println(ex.getMessage());        }
-//    }
+    @FXML
+    private void updateEvent(ActionEvent event) {
+    }
 
+    @FXML
+    private void minimiseWindow(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleClose(ActionEvent event) {
+         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
     
     
-     public ObservableList<Evenement> loadEvenement(){
+         public ObservableList<Evenement> loadEvenement(){
         ObservableList<Evenement> Evenementlist = FXCollections.observableArrayList();
         Connection conn = Myconnexion.getInstance().getCnx();
         String query = "select id, nom  , lieu, heure , nbpart from evenement ";
@@ -193,6 +200,5 @@ public class GestionEvenementController implements Initializable {
     
 
    
-  
     
 }

@@ -1,52 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import java.net.URL?>
-<?import javafx.geometry.Insets?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" onMouseClicked="#close" prefHeight="677.0" prefWidth="963.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.lamda.gui.AcceuilController">
-   <stylesheets>
-      <URL value="@acceuil.css" />
-   </stylesheets>
+<AnchorPane prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.lamda.gui.GestionEvenementController">
    <children>
-      <TableView fx:id="TableV" layoutX="177.0" layoutY="283.0" prefHeight="229.0" prefWidth="662.0">
-         <columns>
-            <TableColumn fx:id="tvId" prefWidth="75.0" text="id" />
-            <TableColumn fx:id="tvNom" prefWidth="75.0" text="nom" />
-            <TableColumn fx:id="tvLieu" prefWidth="83.0" text="lieu" />
-            <TableColumn fx:id="tvHeure" prefWidth="84.0" text="heure" />
-            <TableColumn fx:id="tvNbpart" prefWidth="99.0" text="nombre" />
-            <TableColumn fx:id="tvDate" prefWidth="121.0" text="date" />
-            <TableColumn fx:id="tvDate1" prefWidth="121.0" text="action " />
-         </columns>
-      </TableView>
-      <Pane layoutX="195.0" layoutY="212.0" prefHeight="12.0" prefWidth="625.0" style="-fx-background-color: black;" AnchorPane.leftAnchor="195.0" AnchorPane.rightAnchor="143.0" />
-      <Text layoutX="162.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="gestion des evenement ">
-         <font>
-            <Font size="35.0" />
-         </font>
-      </Text>
-      <HBox layoutX="225.0" layoutY="181.0" prefHeight="31.0" prefWidth="206.0">
+      <AnchorPane fx:id="selectPane" layoutX="20.0" layoutY="77.0" prefHeight="580.0" prefWidth="550.0" style="-fx-background-color: #F5F5F5;" styleClass="tiles">
          <children>
-            <FontAwesomeIconView fx:id="btnajouter" fill="#2196f3" glyphName="USER_PLUS" onMouseClicked="#getAddView" size="30">
-               <HBox.margin>
-                  <Insets right="15.0" />
-               </HBox.margin>
-            </FontAwesomeIconView>
-            <FontAwesomeIconView fx:id="bnRefresh" fill="#00e676" glyphName="REFRESH" onMouseClicked="#refreshTable" size="30" />
+            <Label fx:id="errorlabel" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="397.0" prefHeight="89.0" prefWidth="520.0" textAlignment="CENTER" textFill="#d21a1a" wrapText="true">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TableView fx:id="TableV" layoutX="14.0" layoutY="75.0" prefHeight="344.0" prefWidth="501.0">
+               <columns>
+                  <TableColumn fx:id="tvId" prefWidth="75.0" text="id" />
+                  <TableColumn fx:id="tvNom" prefWidth="75.0" text="nom" />
+                  <TableColumn fx:id="tvLieu" prefWidth="83.0" text="lieu" />
+                  <TableColumn fx:id="tvHeure" prefWidth="84.0" text="heure" />
+                  <TableColumn fx:id="tvNbpart" prefWidth="99.0" text="nombre" />
+                  <TableColumn fx:id="tvDate" prefWidth="83.0" text="date" />
+               </columns>
+            </TableView>
+            <FontAwesomeIconView fx:id="bnRefresh" fill="#00e676" glyphName="REFRESH" layoutX="15.0" layoutY="63.0" onMouseClicked="#refreshTable" size="30" />
          </children>
-      </HBox>
-      <HBox layoutX="833.0" layoutY="85.71428680419922">
+      </AnchorPane>
+      <AnchorPane layoutX="550.0" layoutY="77.0" prefHeight="580.0" prefWidth="356.0" style="-fx-background-color: #e7e6e1;" styleClass="tiles">
          <children>
-            <FontAwesomeIconView fx:id="btnClose" glyphName="CLOSE" onMouseClicked="#close" size="20" />
+            <JFXButton fx:id="cancelbtn" buttonType="RAISED" layoutX="217.0" layoutY="447.0" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #73A800; -fx-background-radius: 20;" text="Cancel" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="AddEvent" buttonType="RAISED" layoutX="24.0" layoutY="445.0" onAction="#ajouteEvent" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #AC005D; -fx-background-radius: 20;" text="Add" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <Label layoutX="23.0" layoutY="14.0" prefHeight="40.0" prefWidth="195.0" text="Select Groupe" textFill="#020438">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="updateEvent" buttonType="RAISED" layoutX="115.0" layoutY="516.0" onAction="#updateEvent" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #00A6ED; -fx-background-radius: 20;" text="Update" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXTextField fx:id="nomTf" focusColor="#3a0088" labelFloat="true" layoutX="24.0" layoutY="96.0" prefHeight="26.0" prefWidth="240.0" promptText="Nom" style="-fx-text-fill: #00043C; -fx-prompt-text-fill: #00043C;" unFocusColor="#111f4d">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="lieuTf" focusColor="#3a0088" labelFloat="true" layoutX="24.0" layoutY="171.0" prefHeight="26.0" prefWidth="240.0" promptText="Lieu" style="-fx-text-fill: #00043C; -fx-prompt-text-fill: #00043C;" unFocusColor="#111f4d">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </JFXTextField>
+            <JFXDatePicker fx:id="datePicker" defaultColor="#3a0088" layoutX="24.0" layoutY="373.0" prefHeight="31.0" prefWidth="366.0" promptText="Date Evenement" style="-fx-text-fill: #00043C; -fx-prompt-text-fill: #00043C;" />
+            <Line endX="170.0" layoutX="126.0" layoutY="210.0" startX="-100.0" stroke="#ac005d" strokeWidth="1.5" />
+            <Line endX="170.0" layoutX="124.0" layoutY="136.0" startX="-100.0" stroke="#ac005d" strokeWidth="1.5" />
+            <JFXTextField fx:id="heureTf" focusColor="#3a0088" labelFloat="true" layoutX="27.0" layoutY="243.0" prefHeight="26.0" prefWidth="240.0" promptText="Heure" style="-fx-text-fill: #00043C; -fx-prompt-text-fill: #00043C;" unFocusColor="#111f4d">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </JFXTextField>
+            <Line endX="170.0" layoutX="126.0" layoutY="282.0" startX="-100.0" stroke="#ac005d" strokeWidth="1.5" />
+            <JFXTextField fx:id="nombreTf" focusColor="#3a0088" labelFloat="true" layoutX="24.0" layoutY="301.0" prefHeight="26.0" prefWidth="240.0" promptText="Nombre" style="-fx-text-fill: #00043C; -fx-prompt-text-fill: #00043C;" unFocusColor="#111f4d">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </JFXTextField>
+            <Line endX="170.0" layoutX="124.0" layoutY="340.0" startX="-100.0" stroke="#ac005d" strokeWidth="1.5" />
+            <Line endX="228.0" layoutX="124.0" layoutY="405.0" startX="-100.0" stroke="#ac005d" strokeWidth="1.5" />
          </children>
-      </HBox>
+      </AnchorPane>
+      <AnchorPane fx:id="toppane" prefHeight="35.0" prefWidth="950.0" style="-fx-background-color: #AC005D;">
+         <children>
+            <Label layoutX="411.0" layoutY="7.0" text="Gestion Evenement" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+                  <MaterialDesignIconView fill="WHITE" glyphName="TICKET" size="20" />
+               </graphic>
+            </Label>
+            <HBox layoutX="880.0" prefHeight="35.0">
+               <children>
+                  <JFXButton fx:id="minimisebtn" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#minimiseWindow" prefHeight="35.0" prefWidth="35.0" ripplerFill="WHITE" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="MINUS" size="20" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="closebtn" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleClose" prefHeight="35.0" prefWidth="35.0" ripplerFill="WHITE">
+                     <graphic>
+                        <MaterialDesignIconView fill="WHITE" glyphName="CLOSE" size="24" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
