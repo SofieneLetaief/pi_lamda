@@ -12,5 +12,5 @@ import edu.lamda.entities.Client;
  * @author Letaief Sofiene
  */
 public class CurrentSession {
-    static Client client= new Client(1, "test Nom ", "test prenom", "let let ");
+    static public  Client client= new Client(1, "test Nom ", "test prenom", "let let ");
 }

@@ -11,6 +11,8 @@ import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.lamda.entities.Evenement;
 import edu.lamda.services.ServiceEvenement;
+import edu.lamda.services.ServiceReservation;
+import edu.lamda.tools.CurrentSession;
 import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
@@ -58,8 +60,6 @@ public class GestionReservationController implements Initializable {
     @FXML
     private JFXTextField searchTf;
     @FXML
-    private JFXButton reserve;
-    @FXML
     private JFXTextField nombreTf;
     @FXML
     private AnchorPane toppane;
@@ -75,12 +75,14 @@ public class GestionReservationController implements Initializable {
          int idCurrentUpdatedEvent;
          int placeDispo=0;
      ServiceEvenement se = new ServiceEvenement();
+       ServiceReservation sr = new ServiceReservation();
      ObservableList list = FXCollections.observableArrayList();
     @FXML
-    private JFXTextField nombreResTf;
+    private JFXButton reserveBtn;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         loadDataEvent();
+         reserveBtn.setDisable(true);
          TableV.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue)
                 -> {
@@ -93,6 +95,12 @@ public class GestionReservationController implements Initializable {
                         System.out.println(placeDispo);
                           
            nombreTf.setText(String.valueOf(placeDispo));
+           
+           if(placeDispo<=0){
+           reserveBtn.setDisable(true);
+           }else{
+           reserveBtn.setDisable(false);
+           }
                }
 
         });
@@ -134,6 +142,12 @@ public class GestionReservationController implements Initializable {
     @FXML
     private void reserveEvent(ActionEvent event) {
         
+        sr.ajouterReservation(idCurrentUpdatedEvent, CurrentSession.client.getId());
+        
+         nombreTf.setText(null);
+         reserveBtn.setDisable(true);
+         
+         
         
     }
 

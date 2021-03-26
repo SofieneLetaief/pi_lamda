@@ -42,7 +42,7 @@
       </AnchorPane>
       <AnchorPane layoutX="528.0" layoutY="77.0" prefHeight="580.0" prefWidth="356.0" style="-fx-background-color: #e7e6e1;" styleClass="tiles">
          <children>
-            <JFXButton fx:id="reserve" buttonType="RAISED" layoutX="86.0" layoutY="321.0" onAction="#reserveEvent" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #AC005D; -fx-background-radius: 20;" text="Reserve" textFill="WHITE">
+            <JFXButton fx:id="reserveBtn" buttonType="RAISED" layoutX="70.0" layoutY="223.0" onAction="#reserveEvent" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #AC005D; -fx-background-radius: 20;" text="Reserve" textFill="WHITE">
                <font>
                   <Font size="19.0" />
                </font>
@@ -61,12 +61,6 @@
                </font>
             </JFXTextField>
             <Line endX="170.0" layoutX="115.0" layoutY="158.0" startX="-100.0" stroke="#ac005d" strokeWidth="1.5" />
-            <JFXTextField fx:id="nombreResTf" focusColor="#3a0088" labelFloat="true" layoutX="14.0" layoutY="217.0" prefHeight="26.0" prefWidth="240.0" promptText="Nombre a reservé" style="-fx-text-fill: #00043C; -fx-prompt-text-fill: #00043C;" unFocusColor="#111f4d">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </JFXTextField>
-            <Line endX="170.0" layoutX="115.0" layoutY="257.0" startX="-100.0" stroke="#ac005d" strokeWidth="1.5" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="toppane" prefHeight="35.0" prefWidth="950.0" style="-fx-background-color: #AC005D;">
