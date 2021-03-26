@@ -33,7 +33,7 @@ public class ServiceEvenement implements Ievenement<Evenement> {
             pst.setString(3, ev.getHeure());
             pst.setInt(4, ev.getNbpart());
             pst.executeUpdate();
-            System.out.println("personne inserer");
+            System.out.println("evenement inserer");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -103,16 +103,17 @@ public class ServiceEvenement implements Ievenement<Evenement> {
     @Override
     public void modifierEvenement(int ide, Evenement ev) {
         try {
-            String requete = "UPDATE evenement SET nom=? ,  lieu =? , heure=? , nbpart=?  WHERE id=?";
+            String requete = "UPDATE evenement SET nom=? ,  lieu =? , heure=? , nbpart=?,date=?  WHERE id=?";
             PreparedStatement pst = Myconnexion.getInstance().getCnx()
                     .prepareStatement(requete);
             pst.setString(1, ev.getNom());
             pst.setString(2, ev.getLieu());
             pst.setString(3, ev.getHeure());
             pst.setInt(4, ev.getNbpart());
-            pst.setInt(5, ide);
+            pst.setDate(5, ev.getDate());
+            pst.setInt(6, ide);
             pst.executeUpdate();
-            System.out.println("Personne modifiée");
+            System.out.println("evenement modifiée");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -169,8 +170,9 @@ public class ServiceEvenement implements Ievenement<Evenement> {
             while (rs.next()) {
                 Evenement ev = new Evenement();
                 ev.setId(rs.getInt("id"));
-                ev.setNom(rs.getString(2));
-                ev.setLieu(rs.getString(3));
+                ev.setNom(rs.getString("nom"));
+                ev.setLieu(rs.getString("lieu"));
+                ev.setHeure(rs.getString("heure"));
                 ev.setNbpart(rs.getInt("nbpart"));
                 ev.setDate(rs.getDate("date"));
                 listEvenement.add(ev);

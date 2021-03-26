@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.lamda.entities.Evenement;
+import edu.lamda.services.ServiceEvenement;
 import edu.lamda.tools.Myconnexion;
 import java.net.URL;
 import java.sql.Connection;
@@ -63,10 +64,6 @@ public class GestionEvenementController implements Initializable {
     @FXML
     private JFXButton cancelbtn;
     @FXML
-    private JFXButton AddEvent;
-    @FXML
-    private JFXButton updateEvent;
-    @FXML
     private JFXTextField nomTf;
     @FXML
     private JFXTextField lieuTf;
@@ -88,18 +85,77 @@ public class GestionEvenementController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
+       ServiceEvenement se = new ServiceEvenement();
+    @FXML
+    private JFXButton addBtn;
+    @FXML
+    private JFXButton updateBtn;
+    @FXML
+    private JFXButton deleteBtn;
+       
+       
+    int idCurrentUpdatedEvent;
+       
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-     showreclamation();
+     loadDataEvent();
+     
+     deleteBtn.setDisable(true);
+     updateBtn.setDisable(true);
+       TableV.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue)
+                -> {
+                    System.out.println(newValue);
+                 populateInputs((Evenement) newValue);
+
+        });
     }    
 
 
     @FXML
     private void ajouteEvent(ActionEvent event) {
+          String nom = nomTf.getText();
+        String lieu = lieuTf.getText();
+        String heure = heureTf.getText();
+        int nbpart = Integer.parseInt(nombreTf.getText()); 
+ 
+       
+        java.sql.Date date = java.sql.Date.valueOf(datePicker.getValue());
+        
+        Evenement e = new Evenement(nom, lieu, heure, nbpart, date);
+
+       
+
+        se.ajouterEvenementD(e);
+        
+        refreshTable(null);
+        
+         reset(null);
+      
+        
     }
 
     @FXML
     private void updateEvent(ActionEvent event) {
+        
+         String nom = nomTf.getText();
+        String lieu = lieuTf.getText();
+        String heure = heureTf.getText();
+        int nbpart = Integer.parseInt(nombreTf.getText()); 
+ 
+       
+        java.sql.Date date = java.sql.Date.valueOf(datePicker.getValue());
+        
+        Evenement e = new Evenement(nom, lieu, heure, nbpart, date);
+        
+        se.modifierEvenement(idCurrentUpdatedEvent, e);
+
+         refreshTable(null);
+         
+         reset(null);
+      
+        
     }
 
     @FXML
@@ -112,37 +168,12 @@ public class GestionEvenementController implements Initializable {
         stage.close();
     }
     
-    
-         public ObservableList<Evenement> loadEvenement(){
-        ObservableList<Evenement> Evenementlist = FXCollections.observableArrayList();
-        Connection conn = Myconnexion.getInstance().getCnx();
-        String query = "select id, nom  , lieu, heure , nbpart from evenement ";
-        
-        Statement st;
-        
-        ResultSet rs;
-        
-        try{
-            st= conn.createStatement();
-            
-            rs= st.executeQuery(query);
-            
-            Evenement event;
-            while(rs.next() ){
-                event = new Evenement(rs.getInt("id"),rs.getString("nom"),rs.getString("lieu"),rs.getString("heure"), rs.getInt("nbpart"));
-                Evenementlist.add(event);
-                
-            }
-          
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
-        return Evenementlist;
-    }
-
-   public void showreclamation(){
-            ObservableList<Evenement> list=  loadEvenement();          
-            
+ 
+     public void loadDataEvent(){
+    //        ObservableList<Evenement> list=  loadEvenement();   
+           ObservableList list = FXCollections.observableArrayList();
+          list.addAll(se.listEvenement());
+  
          tvId.setCellValueFactory(new PropertyValueFactory<Evenement , Integer>("Id"));
          tvNom.setCellValueFactory(new PropertyValueFactory<Evenement, String>("nom"));
           tvDate.setCellValueFactory(new PropertyValueFactory<Evenement, Date>("date"));
@@ -152,37 +183,82 @@ public class GestionEvenementController implements Initializable {
         tvHeure.setCellValueFactory(new PropertyValueFactory<Evenement, String>("heure") );
         tvNbpart.setCellValueFactory(new PropertyValueFactory<Evenement, Integer>("nbpart") );
         
-        
+
          TableV.setItems(list);
-         
-         
-         
-         
-         
-      
+ 
     }  
 
     @FXML
     private void refreshTable(MouseEvent event) {
         
-        ObservableList<Evenement> list=  loadEvenement();          
-            
-         tvId.setCellValueFactory(new PropertyValueFactory<Evenement , Integer>("Id"));
-         tvNom.setCellValueFactory(new PropertyValueFactory<Evenement, String>("nom"));
-          tvDate.setCellValueFactory(new PropertyValueFactory<Evenement, Date>("date"));
+           ObservableList list = FXCollections.observableArrayList();
+           list.addAll(se.listEvenement());
         
-        
-        tvLieu.setCellValueFactory(new PropertyValueFactory<Evenement, String>("lieu") );
-        tvHeure.setCellValueFactory(new PropertyValueFactory<Evenement, String>("heure") );
-        tvNbpart.setCellValueFactory(new PropertyValueFactory<Evenement, Integer>("nbpart") );
-        
-        
-         TableV.setItems(list);
+          TableV.setItems(list);
          
     }
 
     
-      public void notificationPopUp(String title, String Message, String typeNotification) {
+
+
+    @FXML
+    private void reset(ActionEvent event) {
+         nomTf.setText("");
+
+        lieuTf.setText("");
+
+        heureTf.setText("");
+        
+        datePicker.setValue(null);
+
+
+        nombreTf.setText("");
+        
+
+        updateBtn.setDisable(true);
+        deleteBtn.setDisable(true);
+          
+      //  updateEvent.setDisable(true);
+//
+//     AddEvent;
+//     updateEvent;
+//     nomTf;
+//     lieuTf;
+//     datePicker;
+//     heureTf;
+//     nombreTf;
+    }
+    
+   public void  populateInputs(Evenement evenement){
+       
+          nomTf.setText(evenement.getNom());
+
+         lieuTf.setText(evenement.getLieu());
+ 
+         heureTf.setText(evenement.getHeure());
+        
+         datePicker.setValue(evenement.getDate().toLocalDate());
+
+
+         nombreTf.setText(String.valueOf(evenement.getNbpart()));
+          
+        updateBtn.setDisable(false);
+        deleteBtn.setDisable(false);
+    
+   
+   }
+
+    @FXML
+    private void deleteEvent(ActionEvent event) {
+        
+        se.supprimerEvenementParId(idCurrentUpdatedEvent);
+        
+        
+    }
+    
+
+   
+          public void notificationPopUp(String title, String Message, String typeNotification) {
           TrayNotification tray = new TrayNotification();
           AnimationType type = AnimationType.POPUP;
 
@@ -197,8 +273,4 @@ public class GestionEvenementController implements Initializable {
         }
         tray.showAndDismiss(Duration.millis(3000));
     }
-    
-
-   
-    
 }

@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.lamda.gui.GestionEvenementController">
+<AnchorPane prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.lamda.gui.GestionReservationController">
    <children>
       <AnchorPane fx:id="selectPane" layoutX="20.0" layoutY="77.0" prefHeight="580.0" prefWidth="550.0" style="-fx-background-color: #F5F5F5;" styleClass="tiles">
          <children>
@@ -23,22 +23,22 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TableView fx:id="TableV" layoutY="75.0" prefHeight="344.0" prefWidth="490.0">
+            <TableView fx:id="TableV" layoutX="14.0" layoutY="75.0" prefHeight="344.0" prefWidth="501.0">
                <columns>
                   <TableColumn fx:id="tvId" prefWidth="75.0" text="id" />
                   <TableColumn fx:id="tvNom" prefWidth="75.0" text="nom" />
                   <TableColumn fx:id="tvLieu" prefWidth="83.0" text="lieu" />
                   <TableColumn fx:id="tvHeure" prefWidth="84.0" text="heure" />
-                  <TableColumn fx:id="tvNbpart" prefWidth="68.0" text="nombre" />
-                  <TableColumn fx:id="tvDate" prefWidth="114.0" text="date" />
+                  <TableColumn fx:id="tvNbpart" prefWidth="99.0" text="nombre" />
+                  <TableColumn fx:id="tvDate" prefWidth="83.0" text="date" />
                </columns>
             </TableView>
             <FontAwesomeIconView fx:id="bnRefresh" fill="#00e676" glyphName="REFRESH" layoutX="15.0" layoutY="63.0" onMouseClicked="#refreshTable" size="30" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="528.0" layoutY="77.0" prefHeight="580.0" prefWidth="356.0" style="-fx-background-color: #e7e6e1;" styleClass="tiles">
+      <AnchorPane layoutX="550.0" layoutY="77.0" prefHeight="580.0" prefWidth="356.0" style="-fx-background-color: #e7e6e1;" styleClass="tiles">
          <children>
-            <JFXButton fx:id="cancelbtn" buttonType="RAISED" layoutX="217.0" layoutY="447.0" onAction="#reset" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #73A800; -fx-background-radius: 20;" text="Cancel" textFill="WHITE">
+            <JFXButton fx:id="cancelbtn" buttonType="RAISED" layoutX="217.0" layoutY="447.0" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #73A800; -fx-background-radius: 20;" text="Cancel" textFill="WHITE">
                <font>
                   <Font size="19.0" />
                </font>
@@ -46,7 +46,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="addBtn" buttonType="RAISED" layoutX="24.0" layoutY="445.0" onAction="#ajouteEvent" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #AC005D; -fx-background-radius: 20;" text="Add" textFill="WHITE">
+            <JFXButton fx:id="AddEvent" buttonType="RAISED" layoutX="24.0" layoutY="445.0" onAction="#ajouteEvent" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #AC005D; -fx-background-radius: 20;" text="Add" textFill="WHITE">
                <font>
                   <Font size="19.0" />
                </font>
@@ -54,12 +54,12 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <Label layoutX="23.0" layoutY="14.0" prefHeight="40.0" prefWidth="195.0" text="Evenement" textFill="#020438">
+            <Label layoutX="23.0" layoutY="14.0" prefHeight="40.0" prefWidth="195.0" text="Select Groupe" textFill="#020438">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Label>
-            <JFXButton fx:id="updateBtn" buttonType="RAISED" layoutX="24.0" layoutY="516.0" onAction="#updateEvent" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #00A6ED; -fx-background-radius: 20;" text="Update" textFill="WHITE">
+            <JFXButton fx:id="updateEvent" buttonType="RAISED" layoutX="115.0" layoutY="516.0" onAction="#updateEvent" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #00A6ED; -fx-background-radius: 20;" text="Update" textFill="WHITE">
                <font>
                   <Font size="19.0" />
                </font>
@@ -93,14 +93,6 @@
             </JFXTextField>
             <Line endX="170.0" layoutX="124.0" layoutY="340.0" startX="-100.0" stroke="#ac005d" strokeWidth="1.5" />
             <Line endX="228.0" layoutX="124.0" layoutY="405.0" startX="-100.0" stroke="#ac005d" strokeWidth="1.5" />
-            <JFXButton fx:id="deleteBtn" buttonType="RAISED" layoutX="215.0" layoutY="516.0" onAction="#deleteEvent" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: F92323; -fx-background-radius: 20;" text="Delete" textFill="WHITE">
-               <font>
-                  <Font size="19.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="toppane" prefHeight="35.0" prefWidth="950.0" style="-fx-background-color: #AC005D;">
