@@ -269,21 +269,7 @@ public class GestionEvenementController implements Initializable {
     
 
    
-          public void notificationPopUp(String title, String Message, String typeNotification) {
-          TrayNotification tray = new TrayNotification();
-          AnimationType type = AnimationType.POPUP;
-
-        tray.setAnimationType(type);
-        tray.setTitle(title);
-        tray.setMessage(Message);
-        if (typeNotification.equals("SUCCESS")) {
-            tray.setNotificationType(NotificationType.SUCCESS);
-        } else {
-
-            tray.setNotificationType(NotificationType.ERROR);
-        }
-        tray.showAndDismiss(Duration.millis(3000));
-    }
+         
           
       @FXML
     private void filter(KeyEvent event) {

@@ -8,6 +8,7 @@ package edu.lamda.services;
 import edu.lamda.entities.Evenement;
 import edu.lamda.interfaces.Ievenement;
 import edu.lamda.tools.Myconnexion;
+import edu.lamda.tools.Notification;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -51,8 +52,10 @@ public class ServiceEvenement implements Ievenement<Evenement> {
             pst.setInt(4, ev.getNbpart());
             pst.setDate(5, ev.getDate());
             pst.executeUpdate();
-            System.out.println("personne inserer");
+    
+            Notification.notificationPopUp("Evenement Ajouté", "" , "SUCCESS");
         } catch (SQLException ex) {
+         Notification.notificationPopUp("Problème D'ajout  ", "", "FAIL");
             System.out.println(ex.getMessage());
         }
     }
@@ -66,7 +69,9 @@ public class ServiceEvenement implements Ievenement<Evenement> {
             pst.setInt(1, ide);
             pst.executeUpdate();
             System.out.println("evenement supprimée");
+               Notification.notificationPopUp("evenement Supprimer", "evenement num : " + ide, "SUCCESS");
         } catch (SQLException ex) {
+             Notification.notificationPopUp("Problème De Suppression ", "evenement num : " + ide, "FAIL");
             System.out.println(ex.getMessage());
         }
     }
@@ -113,10 +118,9 @@ public class ServiceEvenement implements Ievenement<Evenement> {
             pst.setDate(5, ev.getDate());
             pst.setInt(6, ide);
             pst.executeUpdate();
-            System.out.println("from serice "  + ev);
-            System.out.println(ide);
-            System.out.println("evenement modifiée");
+          Notification.notificationPopUp("Article Modifier", "Evenement num : " + ide, "SUCCESS");
         } catch (SQLException ex) {
+          Notification.notificationPopUp("Probleme de modification", "Evenement num : " + ide, "FAIL");
             System.out.println(ex.getMessage());
         }
 
